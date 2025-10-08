@@ -3,8 +3,7 @@
 typedef struct Node
 {
     int data;
-    struct Node* next;
-    struct Node* prev; 
+    struct Node* next;  
 } Node;
 
 Node* createNode(int data)
@@ -16,8 +15,7 @@ Node* createNode(int data)
         exit(1);
     }
     newNode->data = data;
-    newNode->next = NULL;
-    newNode->prev = NULL;  
+    newNode->next = newNode; 
     return newNode;
 }
 
@@ -30,9 +28,14 @@ Node* insertAtFirst(Node* head, int data)
     }
     else
     {
-        newNode->next = head;
-        head->prev = newNode;  
-        head = newNode;
+        Node* temp = head;
+        while(temp->next != head)  
+        {
+            temp = temp->next;
+        }
+        temp->next = newNode;  
+        newNode->next = head;  
+        head = newNode;  
     }
     printf("\nInserted Successfully\n");
     return head;
@@ -41,31 +44,92 @@ Node* insertAtFirst(Node* head, int data)
 Node* insertAtLast(Node* head, int data)
 {
     Node* newNode = createNode(data);
-    Node* temp = head;
     if(!head)
     {
         head = newNode;
     }
     else
     {
-        while(temp->next)
+        Node* temp = head;
+        while(temp->next != head)  
         {
             temp = temp->next;
         }
-        temp->next = newNode;
-        newNode->prev = temp;  
+        temp->next = newNode;  
+        newNode->next = head;  
     }
     printf("\nInserted Successfully\n");
+    return head;
+}
+
+Node* deleteAtFirst(Node* head)
+{
+    if(!head)
+    {
+        printf("\nList Is Empty\n");
+        return NULL;
+    }
+    else if(head->next == head)  
+    {
+        free(head);
+        printf("\nDeleted Successfully\n");
+        return NULL;
+    }
+    else
+    {
+        Node* temp = head;
+        Node* last = head;
+        while(last->next != head)  
+        {
+            last = last->next;
+        }
+        head = head->next;  
+        last->next = head;  
+        free(temp);
+        printf("\nDeleted Successfully\n");
+    }
+    return head;
+}
+
+Node* deleteAtLast(Node* head)
+{
+    if(!head)
+    {
+        printf("\nList Is Empty\n");
+        return NULL;
+    }
+    else if(head->next == head)  
+    {
+        free(head);
+        printf("\nDeleted Successfully\n");
+        return NULL;
+    }
+    else
+    {
+        Node* temp = head;
+        while(temp->next != head)  
+        {
+            temp = temp->next;
+        }
+        Node* last = temp->next;  
+        temp->next = head;  
+        free(last);
+        printf("\nDeleted Successfully\n");
+    }
     return head;
 }
 
 int count(Node *head)
 {
     int nodeCount = 0;
-    while(head != NULL)
+    if(head != NULL)
     {
-        nodeCount++;
-        head = head->next;
+        Node* temp = head;
+        do
+        {
+            nodeCount++;
+            temp = temp->next;
+        } while(temp != head);  
     }
     return nodeCount;
 }
@@ -76,27 +140,28 @@ Node* insertAtPosition(Node* head, int data, int index)
     {
         printf("\nLinked List is empty\n");
     }
-    else if(index >= count(head) + 1 || index < 0)
+    else if(index < 0 || index > count(head))
     {
         printf("\nInvalid Index! Valid range (0 to %d)\n", count(head));
+    }
+    else if(index == 0)
+    {
+        head = insertAtFirst(head, data);  
     }
     else
     {
         Node* newNode = createNode(data);
         Node* temp = head;
         int position = 0;
-        while(position < index - 1)
+        while(position < index - 1)  
         {
             position++;
             temp = temp->next;
         }
-        newNode->next = temp->next;
-        if(temp->next) 
-            temp->next->prev = newNode; 
-        temp->next = newNode;
-        newNode->prev = temp;  
-        printf("\nInserted Successfully\n");
+        newNode->next = temp->next;  
+        temp->next = newNode;  
     }
+    printf("\nInserted Successfully\n");
     return head;
 }
 
@@ -104,74 +169,29 @@ Node* deleteAtPosition(Node* head, int index)
 {
     int position = 0;
     Node* temp = head;
-    Node* temp2 = NULL;
     if(head == NULL)
     {
         printf("Linked List is empty\n");
     }
-    else if(index < 0 || index > count(head) - 1)
+    else if(index < 0 || index >= count(head))
     {
         printf("Invalid Index! Valid range (0 to %d)\n", count(head) - 1);
     }
+    else if(index == 0)
+    {
+        head = deleteAtFirst(head);  
+    }
     else
     {
-        while(position < index)
+        Node* temp2 = NULL;
+        while(position < index - 1)  
         {
             position++;
-            temp2 = temp;
             temp = temp->next;
         }
-        temp2->next = temp->next;  
-        if(temp->next) 
-            temp->next->prev = temp2;  
-        free(temp);
-        printf("\nDeleted Successfully\n");
-    }
-    return head;
-}
-
-Node* deleteAtFirst(Node* head)
-{
-    Node* temp = head;
-    if(!head)
-    {
-        printf("\nList Is Empty\n");
-        return NULL;
-    }
-    else if(!head->next)
-    {
-        free(temp);
-        printf("\nDeleted Successfully\n");
-        return NULL;
-    }
-    else
-    {
-        head = head->next;
-        head->prev = NULL;  
-        free(temp);
-        printf("\nDeleted Successfully\n");
-    }
-    return head;
-}
-
-Node* deleteAtLast(Node* head)
-{
-    Node* temp = head;
-    Node* tail = NULL;
-    if(!head)
-    {
-        printf("\nList Is Empty\n");
-        return NULL;
-    }
-    else
-    {
-        while(temp->next)
-        {
-            tail = temp;
-            temp = temp->next;
-        }
-        tail->next = NULL;  
-        free(temp);
+        temp2 = temp->next;  
+        temp->next = temp2->next;  
+        free(temp2);
         printf("\nDeleted Successfully\n");
     }
     return head;
@@ -179,27 +199,27 @@ Node* deleteAtLast(Node* head)
 
 Node* reverseList(Node* head)
 {
-    Node* temp = head;
-    Node* fast = NULL;
-    Node* slow = NULL;
-    if(head == NULL)
+    if(!head)
     {
         printf("\nLinked List is empty\n");
+        return head;
     }
-    else
+
+    Node* prev = NULL;
+    Node* current = head;
+    Node* next = NULL;
+
+    do
     {
-        while(temp != NULL)
-        {
-            fast = temp->next;
-            temp->next = slow;
-            if(slow)
-                slow->prev = temp;  
-            slow = temp;
-            temp = fast;
-        }
-        head = slow;
-        printf("\nReversed Successfully\n");
-    }
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    } while(current != head);
+
+    head->next = prev;  
+    head = prev;  
+    printf("\nReversed Successfully\n");
     return head;
 }
 
@@ -211,11 +231,12 @@ void displayList(Node* head)
     }
     else
     {
-        while(head)
+        Node* temp = head;
+        do
         {
-            printf("[%d] <-> ", head->data);  
-            head = head->next;
-        }
+            printf("[%d] -> ", temp->data);
+            temp = temp->next;
+        } while(temp != head);  
         printf("NULL");
     }
 }
