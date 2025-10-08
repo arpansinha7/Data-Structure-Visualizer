@@ -39,3 +39,22 @@
 
 # debug information files
 *.dwo
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon files
+Icon?
+
+# Thumbnails
+._*
+
+# Spotlight and Trash
+.Spotlight-V100
+.Trashes
+
+# macOS metadata
+ehthumbs.db
+Desktop.ini
