@@ -30,3 +30,13 @@ void inOrder(Tree* root)
         inOrder(root->right);
     }
 }
+
+void preOrder(Tree* root)
+{
+    if(root)
+    {
+        printf("[%d] ",root->data);
+        preOrder(root->left);
+        preOrder(root->right);
+    }
+}
