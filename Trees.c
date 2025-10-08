@@ -40,3 +40,13 @@ void preOrder(Tree* root)
         preOrder(root->right);
     }
 }
+
+void postOrder(Tree* root)
+{
+    if(root)
+    {
+        postOrder(root->left);
+        postOrder(root->right);
+        printf("[%d] ",root->data);
+    }
+}
