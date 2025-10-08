@@ -18,3 +18,40 @@ Node* createNode(int data)
     newNode->next=NULL;
     return newNode;
 }
+
+Node* insertAtFirst(Node* head,int data)
+{
+    Node* newNode=createNode(data);
+    if(!head)
+    {
+        head=newNode;
+        
+    }
+    else
+    {
+        newNode->next=head;
+        head=newNode;
+    }
+    printf("\nInserted Successfully\n");
+    return head;
+}
+
+Node* insertAtLast(Node* head,int data)
+{
+    Node* newNode=createNode(data);
+    Node* temp=head;
+    if(!head)
+    {
+        head=newNode;
+    }
+    else
+    {
+        while(temp->next)
+        {
+            temp=temp->next;
+        }
+        temp->next=newNode;
+    }
+    printf("\nInserted Successfully\n");
+    return head;
+}
