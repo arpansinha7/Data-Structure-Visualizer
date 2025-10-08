@@ -20,3 +20,13 @@ Tree* createNode(int data)
     newNode->right=NULL;
     return newNode;
 }
+
+void inOrder(Tree* root)
+{
+    if(root)
+    {
+        inOrder(root->left);
+        printf("[%d] ",root->data);
+        inOrder(root->right);
+    }
+}
