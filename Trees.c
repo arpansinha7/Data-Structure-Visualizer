@@ -21,6 +21,52 @@ Tree* createNode(int data)
     return newNode;
 }
 
+Tree *insertChild(Tree *root,int data)
+{
+    Tree* newNode=createNode(data);
+    Tree* temp=root; 
+    Tree* tail=NULL;
+    if(!root)
+    {
+        root=newNode;
+    }
+    else
+    {
+        while(temp)
+        {
+            tail=temp;
+            if(newNode->data < temp->data)
+            {
+                
+                temp=temp->left;
+            }
+            else if(newNode->data > temp->data)
+            {
+                
+                temp=temp->right;
+            }
+            else
+            {
+                break;
+            }
+        }
+        if(newNode->data < tail->data)
+        {
+            tail->left=newNode;
+        }
+        else if(newNode->data > tail->data)
+        {
+            tail->right=newNode;
+        }
+        else
+        {
+            printf("\nCan't insert duplicate values\n");
+            return root;
+        }
+    }
+    return root;
+}
+
 void inOrder(Tree* root)
 {
     if(root)
