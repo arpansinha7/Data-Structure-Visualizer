@@ -74,7 +74,7 @@ int searchNode(Tree* root, int data)
     {
         if(root->data == data)
         {
-        return 1;
+            return 1;
         }
         else if(data < root->data)
         {
