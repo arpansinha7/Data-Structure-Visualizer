@@ -67,6 +67,27 @@ Tree *insertChild(Tree *root,int data)
     return root;
 }
 
+int searchNode(Tree* root, int data)
+{
+    Tree* temp=root;
+    if (root)
+    {
+        if(root->data == data)
+        {
+        return 1;
+        }
+        else if(data < root->data)
+        {
+            return searchNode(root->left,data);
+        }
+        else 
+        {
+            return searchNode(root->right,data);
+        }
+    }
+    return 0;
+}
+
 void inOrder(Tree* root)
 {
     if(root)
