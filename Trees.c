@@ -147,3 +147,90 @@ void postOrder(Tree* root)
         printf("[%d] ",root->data);
     }
 }
+
+int main()
+{
+    Tree* root = NULL;
+    int data, choice;
+    Tree* temp;
+    do
+    {
+       printf("\n--- Binary Search Tree Menu ---\n");
+       printf("1. Insert A Node\n");
+       printf("2. Search A Node\n");
+       printf("3. Find Minimum\n");
+       printf("4. Find Maximum\n");
+       printf("5. In-Order Traversal\n");
+       printf("6. Pre-Order Traversal\n");
+       printf("7. Post-Order Traversal\n");
+       printf("8. Exit\n");
+       printf("Enter your choice :");
+       scanf("%d", &choice);
+
+       switch(choice)
+       {
+            case 1: printf("Enter value to insert :");
+            scanf("%d", &data);
+            root = insertChild(root, data); break;
+
+
+            case 2:printf("Enter value to search :");
+            scanf("%d", &data);
+            if(searchNode(root, data))
+            {
+                printf("\n%d found in BST\n", data);
+            }
+            else
+            {
+                printf("\n%d not found in BST\n", data);
+            }
+            break;
+
+
+            case 3: temp = findMin(root);
+            if(temp)
+            {
+                printf("\nMinimum Value in BST :%d\n", temp->data);
+            }
+            else
+            {
+                printf("\nBST is Empty\n");
+            }
+            break;
+
+
+            case 4: temp = findMax(root);
+            if(temp)
+            {
+                printf("\nMaximum value in BST :%d\n", temp->data);
+            }
+            else
+            {
+                printf("\nBST is Empty\n");
+            }
+            break;
+
+
+            case 5:printf("\nIn-Order Traversal :");
+            inOrder(root);
+            printf("\n");
+            break;
+
+            case 6:printf("\nPre-Order Traversal :");
+            preOrder(root);
+            printf("\n");
+            break;
+
+            case 7:printf("\npost-Order Traversal :");
+            postOrder(root);
+            printf("\n");
+            break;
+
+            case 8:printf("\nExiting the program...\n"); break;
+
+            default:printf("\nInvalid Input! Try Again\n");
+       }
+    } while (choice !=8);
+    
+    return 0;
+}
