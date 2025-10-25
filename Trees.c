@@ -88,6 +88,36 @@ int searchNode(Tree* root, int data)
     return 0;
 }
 
+Tree* findMin(Tree* root)
+{
+    Tree* temp=root;
+    if(!root)
+    {
+        return NULL;
+    }
+        
+    while(temp->left)
+    {
+        temp=temp->left;
+    }
+    return temp;
+}
+
+Tree* findMax(Tree* root)
+{
+    Tree* temp=root;
+    if(!root)
+    {
+        return NULL;
+    }
+        
+    while(temp->right)
+    {
+        temp=temp->right;
+    }
+    return temp;
+}
+
 void inOrder(Tree* root)
 {
     if(root)
