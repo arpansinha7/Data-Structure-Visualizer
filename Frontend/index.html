@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structure Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1>Data Structure Visualizer</h1>
+            <p>Interactive Learning Tool for DSA</p>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="#" data-section="array">Array</a></li>
+                <li><a href="#" data-section="linked-list">Linked List</a></li>
+                <li><a href="#" data-section="stack">Stack</a></li>
+                <li><a href="#" data-section="queue">Queue</a></li>
+                <li><a href="#" data-section="tree">Tree</a></li>
+                <li><a href="#" data-section="graph">Graph</a></li>
+                <li><a href="#" data-section="searching">Searching</a></li>
+                <li><a href="#" data-section="sorting">Sorting</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="container">
+        <!-- Array Section -->
+        <section id="array" class="ds-section active">
+            <h2>Array Operations</h2>
+            <div class="controls">
+                <input type="number" id="array-value" placeholder="Enter value">
+                <input type="number" id="array-index" placeholder="Enter index">
+                <button id="array-insert">Insert</button>
+                <button id="array-delete">Delete</button>
+                <button id="array-traverse">Traverse</button>
+                <button id="array-search">Search</button>
+                <input type="number" id="array-random-count" placeholder="Count" min="1" max="20">
+                <button id="array-random">Generate Random</button>
+                <button id="array-reset">Reset</button>
+                <label>
+                    Speed: <input type="range" id="array-speed" min="100" max="2000" value="500">
+                </label>
+            </div>
+            <div class="visualization-area">
+                <div id="array-display" class="array-container"></div>
+            </div>
+            <div class="output-console">
+                <h3>Output:</h3>
+                <pre id="array-output"></pre>
+            </div>
+        </section>
+
+        <!-- Linked List Section -->
+        <section id="linked-list" class="ds-section">
+            <h2>Linked List Operations</h2>
+            <div class="controls">
+                <select id="list-type">
+                    <option value="singly">Singly Linked List</option>
+                    <option value="doubly">Doubly Linked List</option>
+                    <option value="circular">Circular Linked List</option>
+                </select>
+                <input type="number" id="list-value" placeholder="Enter value">
+                <input type="number" id="list-position" placeholder="Position">
+                <button id="list-insert-front">Insert Front</button>
+                <button id="list-insert-end">Insert End</button>
+                <button id="list-insert-pos">Insert at Position</button>
+                <button id="list-delete">Delete</button>
+                <button id="list-traverse">Traverse</button>
+                <input type="number" id="list-random-count" placeholder="Count" min="1" max="20">
+                <button id="list-random">Generate Random</button>
+                <button id="list-reset">Reset</button>
+                <label>
+                    Speed: <input type="range" id="list-speed" min="100" max="2000" value="500">
+                </label>
+            </div>
+            <div class="visualization-area">
+                <div id="list-display" class="list-container"></div>
+            </div>
+            <div class="output-console">
+                <h3>Output:</h3>
+                <pre id="list-output"></pre>
+            </div>
+        </section>
+
+        <!-- Stack Section -->
+        <section id="stack" class="ds-section">
+            <h2>Stack Operations (LIFO)</h2>
+            <div class="controls">
+                <input type="number" id="stack-value" placeholder="Enter value">
+                <button id="stack-push">Push</button>
+                <button id="stack-pop">Pop</button>
+                <button id="stack-peek">Peek</button>
+                <input type="number" id="stack-random-count" placeholder="Count" min="1" max="20">
+                <button id="stack-random">Generate Random</button>
+                <button id="stack-reset">Reset</button>
+                <label>
+                    Speed: <input type="range" id="stack-speed" min="100" max="2000" value="500">
+                </label>
+            </div>
+            <div class="visualization-area">
+                <div id="stack-display" class="stack-container"></div>
+            </div>
+            <div class="output-console">
+                <h3>Output:</h3>
+                <pre id="stack-output"></pre>
+            </div>
+        </section>
+
+        <!-- Queue Section -->
+        <section id="queue" class="ds-section">
+            <h2>Queue Operations (FIFO)</h2>
+            <div class="controls">
+                <select id="queue-type">
+                    <option value="simple">Simple Queue</option>
+                    <option value="circular">Circular Queue</option>
+                </select>
+                <input type="number" id="queue-value" placeholder="Enter value">
+                <button id="queue-enqueue">Enqueue</button>
+                <button id="queue-dequeue">Dequeue</button>
+                <button id="queue-peek">Peek</button>
+                <input type="number" id="queue-random-count" placeholder="Count" min="1" max="20">
+                <button id="queue-random">Generate Random</button>
+                <button id="queue-reset">Reset</button>
+                <label>
+                    Speed: <input type="range" id="queue-speed" min="100" max="2000" value="500">
+                </label>
+            </div>
+            <div class="visualization-area">
+                <div id="queue-display" class="queue-container"></div>
+            </div>
+            <div class="output-console">
+                <h3>Output:</h3>
+                <pre id="queue-output"></pre>
+            </div>
+        </section>
+
+        <!-- Tree Section -->
+        <section id="tree" class="ds-section">
+            <h2>Binary Search Tree Operations</h2>
+            <div class="controls">
+                <input type="number" id="tree-value" placeholder="Enter value">
+                <button id="tree-insert">Insert</button>
+                <button id="tree-delete">Delete</button>
+                <button id="tree-search">Search</button>
+                <button id="tree-inorder">Inorder</button>
+                <button id="tree-preorder">Preorder</button>
+                <button id="tree-postorder">Postorder</button>
+                <input type="number" id="tree-random-count" placeholder="Count" min="1" max="15">
+                <button id="tree-random">Generate Random</button>
+                <button id="tree-reset">Reset</button>
+                <label>
+                    Speed: <input type="range" id="tree-speed" min="100" max="2000" value="800">
+                </label>
+            </div>
+            <div class="visualization-area">
+                <svg id="tree-display" class="tree-container"></svg>
+            </div>
+            <div class="output-console">
+                <h3>Output:</h3>
+                <pre id="tree-output"></pre>
+            </div>
+        </section>
+
+        <!-- Graph Section -->
+        <section id="graph" class="ds-section">
+            <h2>Graph Operations</h2>
+            <div class="controls">
+                <input type="number" id="graph-vertices" placeholder="Number of vertices">
+                <button id="graph-create">Create Graph</button>
+                <input type="number" id="graph-from" placeholder="From vertex">
+                <input type="number" id="graph-to" placeholder="To vertex">
+                <button id="graph-add-edge">Add Edge</button>
+                <input type="number" id="graph-start" placeholder="Start vertex">
+                <button id="graph-bfs">BFS</button>
+                <button id="graph-dfs">DFS</button>
+                <input type="number" id="graph-random-count" placeholder="Vertex count" min="3" max="10">
+                <button id="graph-random">Generate Random</button>
+                <button id="graph-reset">Reset</button>
+                <label>
+                    Speed: <input type="range" id="graph-speed" min="100" max="2000" value="800">
+                </label>
+            </div>
+            <div class="visualization-area">
+                <div id="graph-display" class="graph-container"></div>
+            </div>
+            <div class="output-console">
+                <h3>Output:</h3>
+                <pre id="graph-output"></pre>
+            </div>
+        </section>
+
+        <!-- Searching Section -->
+        <section id="searching" class="ds-section">
+            <h2>Searching Algorithms</h2>
+            <div class="controls">
+                <input type="text" id="search-array" placeholder="Enter array (comma separated)">
+                <input type="number" id="search-target" placeholder="Target value">
+                <button id="linear-search">Linear Search</button>
+                <button id="binary-search">Binary Search</button>
+                <input type="number" id="search-random-count" placeholder="Count" min="5" max="20">
+                <button id="search-random">Generate Random</button>
+                <button id="search-reset">Reset</button>
+                <label>
+                    Speed: <input type="range" id="search-speed" min="100" max="2000" value="600">
+                </label>
+            </div>
+            <div class="visualization-area">
+                <div id="search-display" class="search-container"></div>
+            </div>
+            <div class="output-console">
+                <h3>Output:</h3>
+                <pre id="search-output"></pre>
+            </div>
+        </section>
+
+        <!-- Sorting Section -->
+        <section id="sorting" class="ds-section">
+            <h2>Sorting Algorithms</h2>
+            <div class="controls">
+                <input type="text" id="sort-array" placeholder="Enter array (comma separated)">
+                <button id="bubble-sort">Bubble Sort</button>
+                <button id="selection-sort">Selection Sort</button>
+                <button id="insertion-sort">Insertion Sort</button>
+                <button id="merge-sort">Merge Sort</button>
+                <button id="quick-sort">Quick Sort</button>
+                <input type="number" id="sort-random-count" placeholder="Count" min="5" max="30">
+                <button id="sort-random">Generate Random</button>
+                <button id="sort-reset">Reset</button>
+                <label>
+                <input type="checkbox" id="sort-animate" checked> Animate
+                </label>
+                <label>
+                    Speed: <input type="range" id="sort-speed" min="10" max="1000" value="500">
+                </label>
+            </div>
+            <div class="visualization-area">
+                <div id="sort-display" class="sort-container"></div>
+            </div>
+            <div class="output-console">
+                <h3>Output:</h3>
+                <pre id="sort-output"></pre>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Data Structure Visualizer | Interactive Learning Tool</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
